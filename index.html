@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Pancasila Kelas 9 - Tantangan Hak & Kewajiban</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 (CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#dc2626', // Red 600 - Semangat Kebangsaan
+                        primaryDark: '#b91c1c', // Red 700
+                        secondary: '#1e293b', // Slate 800 - Profesional/Formal
+                        accent: '#4f46e5', // Indigo 600 - Interaktif
+                        light: '#f8fafc', // Slate 50
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Hide Scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Custom Scrollbar for content area */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        /* 3D Flip Card CSS (Wajib sesuai spesifikasi) */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .flip-card-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        /* Smooth Tab Transition */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Print Styles */
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; color: black; }
+            .tab-content { display: block !important; page-break-after: always; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 h-screen flex flex-col overflow-hidden font-sans">
+
+    <header class="bg-white shadow-sm border-b border-slate-200 z-20 flex-shrink-0 no-print">
+        <div class="px-4 h-16 flex items-center justify-between max-w-7xl mx-auto w-full">
+            <div class="flex items-center gap-3">
+                <div class="bg-primary/10 text-primary p-2 rounded-lg">
+                    <i class="fa-solid fa-scale-balanced text-xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 uppercase tracking-wider border border-slate-200">Bab 1 | Subbab D</span>
+                        <span class="text-xs font-semibold text-accent" id="module-indicator">Modul 1 / 7</span>
+                    </div>
+                    <h1 class="text-lg md:text-xl font-bold text-secondary leading-tight mt-0.5 truncate max-w-[200px] md:max-w-md">Tantangan Pemenuhan Hak dan Kewajiban</h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors tooltip" title="Cetak Materi">
+                    <i class="fa-solid fa-print"></i>
+                </button>
+                <button onclick="toggleFullScreen()" class="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors tooltip" title="Layar Penuh">
+                    <i class="fa-solid fa-expand" id="fs-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white border-b border-slate-200 z-10 flex-shrink-0 no-print shadow-sm relative">
+        <div class="max-w-7xl mx-auto px-2">
+            <ul class="flex overflow-x-auto no-scrollbar py-3 px-2 gap-2 scroll-smooth items-center" id="chip-container">
+                <!-- Chips akan di-generate oleh JavaScript -->
+            </ul>
+        </div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto custom-scrollbar relative bg-slate-50" id="main-scroll-area">
+        <div class="max-w-4xl mx-auto w-full pb-24 pt-6 px-4 md:px-6">
+            
+            <section id="tab-1" class="tab-content active">
+                <!-- Hero Banner -->
+                <div class="bg-gradient-to-br from-primary to-primaryDark rounded-2xl p-8 md:p-10 text-white shadow-xl mb-8 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 opacity-10">
+                        <i class="fa-solid fa-landmark-dome fa-10x"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 relative z-10">Konsep Utama</h2>
+                    <p class="text-red-50 text-lg md:text-xl leading-relaxed relative z-10 max-w-2xl">
+                        Pemenuhan hak dan pelaksanaan kewajiban warga negara merupakan suatu proses yang idealnya berjalan seimbang. Namun, dalam kenyataannya, proses ini sering kali menghadapi berbagai tantangan, baik yang berasal dari dalam diri individu (internal) maupun dari sistem dan lingkungan sekitar (eksternal).
+                    </p>
+                </div>
+
+                <!-- Analisis Mendalam & Contoh Kongkrit -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 mb-8">
+                    <h3 class="text-xl font-bold text-secondary mb-4 border-l-4 border-primary pl-3">Implementasi & Realita</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        Tantangan ini menyebabkan terjadinya pelanggaran hak (seseorang tidak mendapatkan apa yang seharusnya ia terima) dan pengingkaran kewajiban (seseorang tidak melakukan apa yang seharusnya ia kerjakan). Contoh konkret dalam kehidupan sehari-hari adalah tingginya angka putus sekolah yang mencerminkan belum terpenuhinya hak atas pendidikan, atau warga yang dengan sengaja menghindari pembayaran pajak yang merupakan bentuk pengingkaran kewajiban kepada negara.
+                    </p>
+                    
+                    <!-- TEMPAT GAMBAR TAB 1: Ganti URL di dalam src="..." dengan link gambar Anda -->
+                    <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-slate-300 relative group shadow-sm">
+                        <!-- GANTI "https://placehold.co/..." DENGAN LINK/NAMA FILE GAMBAR ANDA -->
+                        <img src="https://placehold.co/800x400/e2e8f0/475569?text=Ganti+Gambar+Ini+(Tab+1)" alt="Ilustrasi Realita Sosial" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/40 to-transparent flex items-end p-5 pointer-events-none">
+                            <div>
+                                <span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded mb-2 inline-block shadow">Realita Sosial</span>
+                                <p class="text-white text-sm md:text-base font-medium">Masih adanya fasilitas pendidikan yang belum merata merupakan salah satu tantangan nyata pemenuhan hak warga negara.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 Card Highlight -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-primary transition-colors group">
+                        <div class="w-14 h-14 bg-red-50 text-primary rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-primary group-hover:text-white transition-colors"><i class="fa-solid fa-user-xmark"></i></div>
+                        <h4 class="font-bold text-secondary mb-2">Faktor Internal</h4>
+                        <p class="text-sm text-slate-500">Sikap egois, apatis, dan rendahnya kesadaran hukum dari warga negara.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-accent transition-colors group">
+                        <div class="w-14 h-14 bg-indigo-50 text-accent rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-accent group-hover:text-white transition-colors"><i class="fa-solid fa-building-columns"></i></div>
+                        <h4 class="font-bold text-secondary mb-2">Faktor Eksternal</h4>
+                        <p class="text-sm text-slate-500">Penyalahgunaan kekuasaan, ketidaktegasnya aparat, dan kesenjangan ekonomi.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center hover:border-emerald-500 transition-colors group">
+                        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors"><i class="fa-solid fa-scale-unbalanced"></i></div>
+                        <h4 class="font-bold text-secondary mb-2">Dampak Utama</h4>
+                        <p class="text-sm text-slate-500">Terjadinya diskriminasi, ketidakadilan, dan terhambatnya pembangunan nasional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-2" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-secondary text-white p-6 md:p-8 relative overflow-hidden">
+                        <i class="fa-solid fa-gavel absolute -right-6 -bottom-6 text-slate-700 opacity-50 fa-8x"></i>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold tracking-wider backdrop-blur-sm">SUB-TOPIK 1</span>
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-bold">Rendahnya Kesadaran Hukum</h2>
+                            <p class="text-slate-300 mt-2 text-sm md:text-base max-w-xl">Tantangan dari dalam diri individu yang mengabaikan aturan demi kepentingan pribadi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-lg font-bold text-secondary mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-book-open text-primary"></i> Ringkasan Materi
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Tantangan internal yang paling signifikan adalah rendahnya kesadaran warga negara terhadap hukum dan aturan yang berlaku. Sikap individualis dan egois memicu seseorang untuk mendahulukan haknya namun abai terhadap kewajibannya. Hal ini menciptakan budaya ketidakpatuhan yang merugikan masyarakat luas dan menghambat ketertiban sosial.
+                        </p>
+
+                        <div class="bg-red-50 border border-red-100 rounded-xl p-5 mb-6">
+                            <h4 class="font-bold text-primaryDark mb-3 border-b border-red-200 pb-2"><i class="fa-solid fa-motorcycle mr-2"></i>Contoh Kasus Realistis</h4>
+                            <p class="text-sm text-slate-700 italic leading-relaxed">
+                                "Bayu sering kali mengendarai sepeda motor melawan arus lalu lintas dengan alasan agar lebih cepat sampai ke sekolah. Ia juga jarang memakai helm karena merasa jaraknya dekat dan kebetulan tidak ada polisi yang berjaga. Tindakan Bayu ini bukan hanya bentuk pengingkaran kewajiban mematuhi rambu lalu lintas, tetapi juga membahayakan keselamatan dirinya dan merampas hak pejalan kaki serta pengendara lain atas jalan raya yang aman."
+                            </p>
+                        </div>
+
+                        <!-- TEMPAT GAMBAR TAB 2: Ganti URL di dalam src="..." dengan link gambar Anda -->
+                        <div class="w-full h-48 rounded-lg overflow-hidden border border-slate-300 relative group shadow-sm">
+                            <!-- GANTI "https://placehold.co/..." DENGAN LINK/NAMA FILE GAMBAR ANDA -->
+                            <img src="https://placehold.co/800x300/f8fafc/334155?text=Ganti+Gambar+Lalu+Lintas+(Tab+2)" alt="Ilustrasi Lalu Lintas" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            
+                            <div class="absolute bottom-0 left-0 right-0 bg-slate-900/80 backdrop-blur-sm text-white text-xs p-3 text-center border-t border-slate-700 pointer-events-none">Mematuhi rambu lalu lintas adalah cerminan utama kesadaran hukum masyarakat.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-3" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-accent text-white p-6 md:p-8 relative overflow-hidden">
+                        <i class="fa-solid fa-chart-line absolute -right-6 -bottom-6 text-indigo-800 opacity-30 fa-8x"></i>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold tracking-wider backdrop-blur-sm">SUB-TOPIK 2</span>
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-bold">Kesenjangan Sosial & Ekonomi</h2>
+                            <p class="text-indigo-100 mt-2 text-sm md:text-base max-w-xl">Hambatan struktural yang menyebabkan tidak meratanya pemenuhan hak-hak dasar warga negara.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-lg font-bold text-secondary mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-accent"></i> Ringkasan Materi
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Ketimpangan atau kesenjangan ekonomi yang tajam menjadi tantangan berat bagi negara dalam mewujudkan keadilan sosial. Hal ini membuat pemenuhan hak-hak dasar, seperti akses pendidikan berkualitas dan layanan kesehatan yang layak, sulit menjangkau seluruh lapisan masyarakat. Di sisi lain, tekanan ekonomi juga kerap menjadi pemicu warga negara sulit melaksanakan kewajibannya.
+                        </p>
+
+                        <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-5 mb-6">
+                            <h4 class="font-bold text-indigo-900 mb-3 border-b border-indigo-200 pb-2"><i class="fa-solid fa-children mr-2 text-indigo-600"></i>Contoh Kasus Realistis</h4>
+                            <p class="text-sm text-slate-700 italic leading-relaxed">
+                                "Siti, seorang anak usia 13 tahun di daerah terpencil, terpaksa putus sekolah karena harus bekerja membantu orang tuanya bertani guna memenuhi kebutuhan makan sehari-hari. Di daerahnya, fasilitas sekolah menengah sangat jauh dan kondisi jalannya rusak parah. Dalam kasus ini, hak Siti untuk mendapatkan pendidikan (sesuai UUD 1945 Pasal 31) belum terpenuhi akibat faktor ekonomi keluarga dan belum meratanya pembangunan infrastruktur oleh pemerintah daerah."
+                            </p>
+                        </div>
+
+                        <!-- TEMPAT GAMBAR TAB 3: Ganti URL di dalam src="..." dengan link gambar Anda -->
+                        <div class="w-full h-48 rounded-lg overflow-hidden border border-indigo-200 relative group shadow-sm">
+                             <!-- GANTI "https://placehold.co/..." DENGAN LINK/NAMA FILE GAMBAR ANDA -->
+                             <img src="https://placehold.co/800x300/eef2ff/3730a3?text=Ganti+Gambar+Kesenjangan+(Tab+3)" alt="Ilustrasi Kesenjangan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                             
+                             <div class="absolute bottom-0 left-0 right-0 bg-accent/80 backdrop-blur-sm text-white text-xs p-3 text-center pointer-events-none">Faktor ekonomi berdampak langsung pada akses pendidikan anak.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-4" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-800 text-white p-6 md:p-8 relative overflow-hidden">
+                        <i class="fa-solid fa-microchip absolute -right-6 -bottom-6 text-slate-700 opacity-40 fa-8x"></i>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold tracking-wider backdrop-blur-sm">SUB-TOPIK 3</span>
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-bold">Penyalahgunaan Kekuasaan & Teknologi</h2>
+                            <p class="text-slate-300 mt-2 text-sm md:text-base max-w-xl">Hambatan dari aparatur negara dan dampak negatif perkembangan digital.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-lg font-bold text-secondary mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-slate-600"></i> Ringkasan Materi
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Tantangan ini berasal dari oknum yang memiliki wewenang atau akses informasi. Penyalahgunaan kekuasaan, seperti praktik korupsi, secara langsung merampas hak rakyat atas dana pembangunan. Sementara itu, kemajuan teknologi informasi tanpa literasi digital yang baik melahirkan kejahatan baru yang mengancam hak atas privasi dan rasa aman masyarakat.
+                        </p>
+
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-6">
+                            <h4 class="font-bold text-slate-800 mb-3 border-b border-slate-200 pb-2"><i class="fa-solid fa-laptop-code mr-2 text-slate-500"></i>Contoh Kasus Realistis</h4>
+                            <p class="text-sm text-slate-700 italic leading-relaxed">
+                                "Terdapat oknum pejabat daerah yang tertangkap menyelewengkan dana bantuan sosial (Bansos). Akibat korupsi ini, banyak keluarga prasejahtera yang kelaparan karena tidak menerima hak bantuannya. Di sisi lain, seorang pelajar menyebarkan berita bohong (hoaks) bernada provokasi di grup media sosial, yang memicu keributan antarwarga dan melanggar hak orang lain untuk hidup tenang dan damai."
+                            </p>
+                        </div>
+
+                        <!-- TEMPAT GAMBAR TAB 4: Ganti URL di dalam src="..." dengan link gambar Anda -->
+                        <div class="w-full h-48 rounded-lg overflow-hidden border border-slate-200 relative group shadow-sm mb-6">
+                             <!-- GANTI "https://placehold.co/..." DENGAN LINK/NAMA FILE GAMBAR ANDA -->
+                             <img src="https://placehold.co/800x300/f1f5f9/475569?text=Ganti+Gambar+Teknologi+(Tab+4)" alt="Ilustrasi Teknologi dan Hoaks" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                             
+                             <div class="absolute bottom-0 left-0 right-0 bg-slate-800/80 backdrop-blur-sm text-white text-xs p-3 text-center pointer-events-none">Perilaku Korupsi yang dapat berdampak pada kemajuan pendidikan.</div>
+                        </div>
+
+                        <!-- Poin Penting -->
+                        <div class="border border-red-200 bg-red-50/30 rounded-lg p-4">
+                            <h5 class="text-sm font-bold text-red-700 mb-2">Dampak Kritis:</h5>
+                            <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+                                <li>Korupsi menghambat pemenuhan hak kesejahteraan sosial.</li>
+                                <li>Cyberbullying dan hoaks merusak persatuan (Sila ke-3).</li>
+                                <li>Menurunkan kepercayaan masyarakat terhadap hukum dan negara.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-5" class="tab-content">
+                <div class="text-center mb-8 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h2 class="text-2xl md:text-3xl font-bold text-secondary mb-2"><i class="fa-solid fa-clone text-accent mr-2"></i>Kartu Pintar 3D</h2>
+                    <p class="text-slate-500">Uji ingatanmu! Klik kartu di bawah ini untuk membaliknya dan melihat jawaban. Pahami konsepnya sebelum lanjut ke Asesmen.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="flashcard-container">
+                    <!-- Kartu di-generate oleh JS -->
+                </div>
+            </section>
+
+            <section id="tab-6" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-accent to-indigo-800 text-white p-6">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i class="fa-solid fa-pen-to-square text-2xl"></i>
+                            <h2 class="text-2xl font-bold">Evaluasi Pemahaman</h2>
+                        </div>
+                        <p class="text-indigo-100 text-sm ml-9">Jawablah pertanyaan berikut dengan <strong>satu atau dua kata</strong> secara tepat.</p>
+                    </div>
+                    
+                    <div class="p-6 md:p-8">
+                        <form id="quiz-form" class="space-y-6">
+                            <!-- Identitas Siswa -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-5 rounded-xl border border-slate-200 mb-6 shadow-inner">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Nama Lengkap <span class="text-primary">*</span></label>
+                                    <input type="text" id="student-name" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-accent focus:border-accent outline-none transition shadow-sm" placeholder="Masukkan nama...">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Kelas <span class="text-primary">*</span></label>
+                                    <input type="text" id="student-class" required class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-accent focus:border-accent outline-none transition shadow-sm" placeholder="Contoh: IX A">
+                                </div>
+                            </div>
+
+                            <!-- Container Soal -->
+                            <div id="questions-container" class="space-y-4">
+                                <!-- Soal di-generate oleh JS -->
+                            </div>
+
+                            <!-- Area Display Skor -->
+                            <div id="score-display" class="hidden p-6 bg-emerald-50 border border-emerald-200 rounded-xl text-center shadow-inner transition-all transform duration-500 scale-95 opacity-0">
+                                <h3 class="text-lg font-bold text-emerald-800 mb-2">Hasil Evaluasi Anda</h3>
+                                <div class="text-5xl font-black text-emerald-600 mb-2 drop-shadow-sm" id="final-score">0/100</div>
+                                <p class="text-sm font-medium text-emerald-700 mb-1" id="score-feedback">Bagus sekali!</p>
+                                <div id="submit-status" class="mt-4 p-3 bg-white rounded-lg text-xs font-semibold text-slate-500 border border-slate-200 inline-block">Menunggu submit...</div>
+                            </div>
+
+                            <!-- Tombol Aksi -->
+                            <div class="flex gap-4 pt-6 border-t border-slate-200">
+                                <button type="submit" id="btn-submit" class="flex-1 bg-accent hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-accent/30 transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i> Submit Jawaban & Nilai
+                                </button>
+                                <button type="button" onclick="resetQuiz()" class="px-6 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl transition-colors border border-slate-300 flex items-center justify-center gap-2 tooltip" title="Ulangi dari awal">
+                                    <i class="fa-solid fa-rotate-right"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+             <section id="tab-7" class="tab-content">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12 text-center max-w-2xl mx-auto relative overflow-hidden">
+                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-accent/10 rounded-full blur-2xl"></div>
+                    
+                    <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 shadow-inner relative z-10">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-secondary mb-4 relative z-10">Materi Selesai!</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed relative z-10 text-lg">
+                        Kamu telah menyelesaikan materi <strong>Bab 1 Subbab D: Tantangan Pemenuhan Hak dan Kewajiban Warga Negara</strong>. 
+                        <br><br>
+                        Mari bersama tingkatkan kesadaran hukum, hindari sifat egois, dan bijak berteknologi demi terwujudnya keadilan sosial bagi seluruh rakyat Indonesia.
+                    </p>
+                    <div class="text-xs text-slate-400 border-t border-slate-100 pt-6 mt-4 relative z-10">
+                        <p><i class="fa-solid fa-book mr-1"></i> Referensi: Buku Panduan Guru Pendidikan Pancasila SMP/MTs Kelas IX, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi, Edisi Revisi 2023.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        /**
+         * ==========================================
+         * KONFIGURASI GOOGLE APPS SCRIPT
+         * ==========================================
+         * Ganti URL di bawah dengan Web App URL hasil deploy Code.gs Anda.
+         */
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKK8Tr2veb_ybzhAnNU_mbxxfo1Q2wddl71TXCiOyxXPQGIqL76kqYr-bPObcKpXTG/exec';
+
+        // --- Data Definisi Tab ---
+        const tabs = [
+            { id: 'tab-1', title: 'Konsep Dasar', icon: 'fa-landmark' },
+            { id: 'tab-2', title: 'Kesadaran Hukum', icon: 'fa-scale-unbalanced' },
+            { id: 'tab-3', title: 'Kesenjangan', icon: 'fa-chart-pie' },
+            { id: 'tab-4', title: 'Penyalahgunaan', icon: 'fa-triangle-exclamation' },
+            { id: 'tab-5', title: 'Flashcard', icon: 'fa-clone' },
+            { id: 'tab-6', title: 'Asesmen', icon: 'fa-pen-to-square' },
+            { id: 'tab-7', title: 'Penutup', icon: 'fa-flag-checkered' }
+        ];
+
+        // --- Data Flashcard (Sesuai Materi) ---
+        const flashcards = [
+            { q: "Sikap tidak mau tahu terhadap aturan yang berlaku disebut?", a: "Apatis / Rendahnya kesadaran hukum." },
+            { q: "Mengambil hak orang lain melalui tindak pidana korupsi merupakan contoh dari?", a: "Penyalahgunaan kekuasaan." },
+            { q: "Sikap mementingkan diri sendiri sehingga mengabaikan kewajiban disebut sikap?", a: "Egois." },
+            { q: "Penyebaran berita bohong (hoaks) melanggar hak orang lain atas?", a: "Informasi yang benar dan rasa aman." },
+            { q: "Kesenjangan sosial ekonomi dapat menghambat pemenuhan hak dalam bidang?", a: "Pendidikan dan kesehatan." }
+        ];
+
+        // --- Data Kuis (Sesuai Materi & Spesifikasi) ---
+        const quizData = [
+            { q: "Sikap mementingkan diri sendiri dan mengabaikan kewajiban disebut sikap...", keys: ["egois", "individualis"] },
+            { q: "Tidak memakai helm saat berkendara adalah contoh tantangan berupa rendahnya kesadaran...", keys: ["hukum", "aturan"] },
+            { q: "Korupsi dana bantuan sosial merupakan bentuk hambatan yang disebabkan oleh penyalahgunaan...", keys: ["kekuasaan", "jabatan", "wewenang"] },
+            { q: "Kemajuan teknologi dapat menjadi tantangan jika disalahgunakan untuk menyebar berita bohong atau...", keys: ["hoaks", "hoax"] },
+            { q: "Anak putus sekolah karena kendala biaya merupakan contoh belum terpenuhinya hak dalam bidang...", keys: ["pendidikan", "sekolah"] },
+            { q: "Sikap tidak peduli terhadap lingkungan sekitar atau masalah negara disebut...", keys: ["apatis", "masa bodoh"] },
+            { q: "Tindakan sewenang-wenang majikan terhadap buruh merupakan bentuk pelanggaran hak asasi...", keys: ["manusia", "warga negara"] },
+            { q: "Agar hak dan kewajiban berjalan seimbang, diperlukan sikap... dari setiap warga negara.", keys: ["tanggung jawab", "sadar hukum", "tanggungjawab"] },
+            { q: "Faktor ekonomi yang menyebabkan tidak meratanya pembangunan disebut kesenjangan...", keys: ["sosial", "ekonomi"] },
+            { q: "Pelanggaran hak (seperti pencurian) sangat merugikan pihak lain dan menciptakan rasa tidak...", keys: ["aman", "nyaman", "adil"] }
+        ];
+
+        // --- Inisialisasi Aplikasi ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTabs();
+            renderFlashcards();
+            renderQuiz();
+            activateTab('tab-1', 0);
+        });
+
+        // --- Fungsi Logika Navigasi Tab ---
+        function renderTabs() {
+            const container = document.getElementById('chip-container');
+            container.innerHTML = '';
+            tabs.forEach((tab, index) => {
+                const btn = document.createElement('button');
+                btn.className = `chip-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold transition-all border flex items-center gap-2`;
+                btn.id = `btn-${tab.id}`;
+                btn.innerHTML = `<i class="fa-solid ${tab.icon}"></i> ${tab.title}`;
+                btn.onclick = () => activateTab(tab.id, index);
+                container.appendChild(btn);
+            });
+        }
+
+        function activateTab(tabId, index) {
+            // Update Indikator Modul
+            document.getElementById('module-indicator').textContent = `Modul ${index + 1} / ${tabs.length}`;
+
+            // Sembunyikan semua konten
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            
+            // Reset gaya tombol chip
+            document.querySelectorAll('.chip-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white', 'border-primary', 'shadow-md');
+                btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200', 'hover:bg-slate-50');
+            });
+
+            // Tampilkan konten aktif
+            document.getElementById(tabId).classList.add('active');
+            
+            // Beri gaya pada chip aktif
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200', 'hover:bg-slate-50');
+                activeBtn.classList.add('bg-primary', 'text-white', 'border-primary', 'shadow-md');
+
+                // Auto-center scroll pada chip bar
+                const container = document.getElementById('chip-container');
+                const scrollLeft = activeBtn.offsetLeft - (container.offsetWidth / 2) + (activeBtn.offsetWidth / 2);
+                container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            }
+            
+            // Scroll area konten kembali ke atas
+            document.getElementById('main-scroll-area').scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // --- Fungsi Pembuatan Flashcard ---
+        function renderFlashcards() {
+            const container = document.getElementById('flashcard-container');
+            container.innerHTML = '';
+            
+            flashcards.forEach((card, i) => {
+                const html = `
+                <div class="h-56 w-full perspective-1000 cursor-pointer flip-card group" onclick="this.classList.toggle('flipped')">
+                    <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-md rounded-xl group-hover:shadow-lg transition-shadow">
+                        <!-- Sisi Depan -->
+                        <div class="absolute inset-0 backface-hidden bg-white border-2 border-slate-100 rounded-xl p-6 flex flex-col justify-center items-center text-center">
+                            <span class="absolute top-3 left-4 text-xs font-bold text-slate-400 uppercase">Pertanyaan ${i+1}</span>
+                            <div class="text-4xl text-primary/10 absolute top-2 right-4"><i class="fa-solid fa-circle-question"></i></div>
+                            <p class="font-semibold text-slate-700 leading-snug mt-2">${card.q}</p>
+                            <span class="text-xs text-primary font-medium mt-4 animate-bounce"><i class="fa-solid fa-hand-pointer mr-1"></i>Tap untuk membalik</span>
+                        </div>
+                        <!-- Sisi Belakang -->
+                        <div class="absolute inset-0 backface-hidden bg-gradient-to-br from-primary to-primaryDark text-white border border-primaryDark rounded-xl p-6 flex flex-col justify-center items-center text-center rotate-y-180">
+                            <span class="absolute top-3 left-4 text-xs font-bold text-red-200 uppercase">Jawaban</span>
+                            <div class="text-3xl text-white/20 absolute top-2 right-4"><i class="fa-solid fa-lightbulb"></i></div>
+                            <p class="font-bold text-lg leading-snug drop-shadow-sm mt-2">${card.a}</p>
+                        </div>
+                    </div>
+                </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        // --- Fungsi Pembuatan dan Validasi Kuis ---
+        function renderQuiz() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+            
+            quizData.forEach((q, i) => {
+                const html = `
+                <div class="quiz-item p-4 md:p-5 bg-white border border-slate-200 rounded-xl relative transition-all" id="q-container-${i}">
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-8 h-8 bg-slate-100 text-slate-500 font-bold rounded-full flex items-center justify-center border border-slate-200 shadow-sm">${i+1}</span>
+                        <div class="flex-1 w-full">
+                            <label class="block text-slate-700 font-medium mb-2 leading-snug">${q.q}</label>
+                            <div class="relative max-w-lg">
+                                <input type="text" id="ans-${i}" autocomplete="off" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent outline-none transition pr-10" placeholder="Ketik jawaban...">
+                                <span id="icon-${i}" class="absolute right-3 top-2.5 text-lg hidden"></span>
+                            </div>
+                            <div id="key-hint-${i}" class="hidden mt-2 text-xs font-medium px-2 py-1 bg-amber-50 text-amber-700 rounded border border-amber-200 inline-block">
+                                Kunci: ${q.keys[0]}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        // Event Listener Form Submit Kuis
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('student-name').value.trim();
+            const gradeClass = document.getElementById('student-class').value.trim();
+            const btnSubmit = document.getElementById('btn-submit');
+            
+            if(!name || !gradeClass) {
+                alert("Mohon lengkapi Nama dan Kelas terlebih dahulu.");
+                return;
+            }
+
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+
+            let correctCount = 0;
+            const rincianJawaban = [];
+            
+            // Proses pengecekan jawaban
+            quizData.forEach((q, i) => {
+                const inputEl = document.getElementById(`ans-${i}`);
+                const iconEl = document.getElementById(`icon-${i}`);
+                const containerEl = document.getElementById(`q-container-${i}`);
+                const hintEl = document.getElementById(`key-hint-${i}`);
+                
+                // Normalisasi input: huruf kecil, hapus spasi berlebih, hapus tanda baca dasar
+                let userAnswer = inputEl.value.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.,!?]/g, ''); 
+                
+                let isCorrect = false;
+                
+                // Pengecekan dengan multiple keys
+                for(let key of q.keys) {
+                    if(userAnswer === key.toLowerCase()) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+                
+                // Simpan data untuk sheet
+                rincianJawaban.push({
+                    soal: i+1,
+                    jawabanSiswa: inputEl.value || '(kosong)',
+                    status: isCorrect ? "Benar" : "Salah"
+                });
+
+                // UI Feedback Visual (Merah/Hijau)
+                iconEl.classList.remove('hidden', 'text-emerald-500', 'text-primary', 'fa-circle-check', 'fa-circle-xmark');
+                containerEl.classList.remove('border-emerald-300', 'border-red-300', 'bg-emerald-50/20', 'bg-red-50/20');
+                inputEl.classList.remove('border-emerald-400', 'border-red-400', 'bg-white', 'bg-slate-50');
+                hintEl.classList.add('hidden'); // Sembunyikan hint terlebih dahulu
+                
+                inputEl.readOnly = true; // Kunci input setelah submit
+                inputEl.classList.add('bg-slate-50');
+
+                if(isCorrect) {
+                    correctCount++;
+                    iconEl.classList.add('fa-solid', 'fa-circle-check', 'text-emerald-500');
+                    containerEl.classList.add('border-emerald-300', 'bg-emerald-50/20');
+                    inputEl.classList.add('border-emerald-400');
+                } else {
+                    iconEl.classList.add('fa-solid', 'fa-circle-xmark', 'text-primary');
+                    containerEl.classList.add('border-red-300', 'bg-red-50/20');
+                    inputEl.classList.add('border-red-400');
+                    hintEl.classList.remove('hidden'); // Tampilkan kunci jawaban jika salah
+                }
+            });
+            
+            // Kalkulasi Skor
+            const finalScore = (correctCount / quizData.length) * 100;
+            
+            // Animasi Tampilan Skor
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.classList.remove('hidden');
+            setTimeout(() => {
+                scoreDisplay.classList.remove('scale-95', 'opacity-0');
+                scoreDisplay.classList.add('scale-100', 'opacity-100');
+            }, 100);
+
+            document.getElementById('final-score').textContent = finalScore;
+            
+            let feedback = "";
+            let keterangan = "";
+            if(finalScore >= 80) { 
+                feedback = "Sangat Memuaskan! Anda memahami tantangan pemenuhan hak dan kewajiban."; 
+                keterangan = "Lulus (Sangat Baik)";
+            } else if(finalScore >= 60) { 
+                feedback = "Cukup baik. Perhatikan kembali faktor-faktor hambatannya."; 
+                keterangan = "Lulus (Cukup)";
+            } else { 
+                feedback = "Jangan menyerah, baca kembali rangkuman materi di Tab sebelumnya."; 
+                keterangan = "Perlu Remedial";
+            }
+            document.getElementById('score-feedback').textContent = feedback;
+
+            // Scroll ke hasil
+            document.getElementById('main-scroll-area').scrollTo({top: scoreDisplay.offsetTop - 100, behavior: 'smooth'});
+
+            // Kirim ke Google Sheets
+            submitToGoogleSheets(name, gradeClass, finalScore, keterangan, rincianJawaban, btnSubmit);
+        });
+
+        function resetQuiz() {
+            document.getElementById('quiz-form').reset();
+            const btnSubmit = document.getElementById('btn-submit');
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Jawaban & Nilai';
+
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => scoreDisplay.classList.add('hidden'), 300);
+            
+            document.getElementById('submit-status').innerHTML = 'Menunggu submit...';
+            document.getElementById('submit-status').className = "mt-4 p-3 bg-white rounded-lg text-xs font-semibold text-slate-500 border border-slate-200 inline-block";
+            
+            quizData.forEach((_, i) => {
+                const inputEl = document.getElementById(`ans-${i}`);
+                const iconEl = document.getElementById(`icon-${i}`);
+                const containerEl = document.getElementById(`q-container-${i}`);
+                const hintEl = document.getElementById(`key-hint-${i}`);
+                
+                inputEl.readOnly = false;
+                iconEl.className = "absolute right-3 top-2.5 text-lg hidden";
+                hintEl.className = "hidden mt-2 text-xs font-medium px-2 py-1 bg-amber-50 text-amber-700 rounded border border-amber-200 inline-block";
+                containerEl.className = "quiz-item p-4 md:p-5 bg-white border border-slate-200 rounded-xl relative transition-all";
+                inputEl.className = "w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent outline-none transition pr-10";
+            });
+            
+            document.getElementById('main-scroll-area').scrollTo({top: document.getElementById('quiz-form').offsetTop - 50, behavior: 'smooth'});
+        }
+
+        // --- Fungsi Komunikasi API ke Apps Script ---
+        function submitToGoogleSheets(nama, kelas, skor, keterangan, rincian, btnRef) {
+            const statusEl = document.getElementById('submit-status');
+            statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-accent"></i> Menyimpan data ke server...';
+            statusEl.className = "mt-4 p-3 bg-indigo-50 rounded-lg text-xs font-semibold text-accent border border-indigo-200 inline-block";
+
+            // Format rincian menjadi string untuk direkam dalam satu sel di Spreadsheet
+            const rincianStr = rincian.map(r => `Soal ${r.soal}: ${r.jawabanSiswa} (${r.status})`).join(" | ");
+            
+            const payload = {
+                nama: nama,
+                kelas: kelas,
+                skor: skor,
+                keterangan: keterangan,
+                rincian: rincianStr,
+                timestamp: new Date().toLocaleString('id-ID')
+            };
+
+            // Fetch POST dengan mode text/plain untuk melewati preflight CORS sederhana
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 'success') {
+                    statusEl.innerHTML = '<i class="fa-solid fa-check-circle text-emerald-600 text-base align-middle mr-1"></i> Data nilai berhasil direkam Guru!';
+                    statusEl.className = "mt-4 p-3 bg-emerald-100 rounded-lg text-sm font-bold text-emerald-800 border border-emerald-300 inline-block shadow-sm";
+                } else {
+                    throw new Error(data.message || "Server error");
+                }
+            })
+            .catch(error => {
+                console.error('Error Apps Script:', error);
+                statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-amber-600 text-base align-middle mr-1"></i> Nilai tampil di layar, namun gagal tersambung ke server Guru.';
+                statusEl.className = "mt-4 p-3 bg-amber-50 rounded-lg text-sm font-bold text-amber-800 border border-amber-300 inline-block shadow-sm";
+            })
+            .finally(() => {
+                // Jangan enable button submit untuk mencegah double submit, gunakan tombol reset
+                btnRef.innerHTML = '<i class="fa-solid fa-check"></i> Selesai';
+            });
+        }
+
+        // --- Utilitas ---
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Gagal mengaktifkan mode layar penuh: ${err.message}`);
+                });
+                document.getElementById('fs-icon').classList.replace('fa-expand', 'fa-compress');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                    document.getElementById('fs-icon').classList.replace('fa-compress', 'fa-expand');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
